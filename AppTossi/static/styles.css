@@ -1,0 +1,46 @@
+/* Estilos personalizados */
+
+/* Estilo para la barra de navegación */
+.navbar {
+    background-color: #343a40 !important;
+  }
+  
+  /* Estilo para el botón del menú */
+  .navbar-dark .navbar-toggler-icon {
+    background-color: #ffe600;
+  }
+  
+  /* Estilo para la sección de presentación */
+  .bg-image {
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+  }
+  
+  /* Estilo para el botón de la sección de presentación */
+  .btn-primary {
+    background-color: #FF6347;
+    border-color: #FF6347;
+  }
+  
+  .btn-primary:hover {
+    background-color: #DC143C;
+    border-color: #DC143C;
+  }
+  
+  /* Estilo para el formulario de contacto */
+  .form-control {
+    border-color: #FF6347;
+  }
+  
+  /* Cambia el color del texto a blanco para que se vea mejor sobre fondos oscuros */
+  .text-white {
+    color: white;
+  }
+
+/* Establece la imagen de fondo */
+.bg-image {
+  background-image: url(images/pizza.jpeg);
+  background-size: cover;
+  background-position: center;
+}
