@@ -3,14 +3,36 @@ from django.db import models
 class Menu(models.Model):
     
     product_name = models.CharField(max_length=30) 
-    price = models.IntegerField
-    stock = models.BooleanField
+    price = models.IntegerField(max_length=30) 
+    # stock = models.IntegerField    <---- se podria implementar en un futuro
     
-class Recetas(models.Model):
-    
+class Pizza(models.Model):
+
     product_name = models.CharField(max_length=30) 
-    ingredients = models.CharField
-    preparation = models.CharField
+    price = models.IntegerField(max_length=30) 
+    ingredients = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return f'{self.product_name}'
+    
+    
+    
+class Empanada(models.Model):
+    product_name = models.CharField(max_length=30) 
+    price = models.IntegerField(max_length=30) 
+    ingredients = models.CharField(max_length=200) 
+
+    def __str__(self):
+        return f'{self.product_name}'
+    
+class Postre(models.Model):
+    product_name = models.CharField(max_length=30) 
+    price = models.IntegerField(max_length=30) 
+    ingredients = models.CharField(max_length=200)  
+    
+    def __str__(self):
+        return f'{self.product_name}'
+
     
 
     
