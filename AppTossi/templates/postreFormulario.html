@@ -1,0 +1,10 @@
+{% extends 'padre.html' %}
+
+{% block contenidoQueCambia %}
+<form action = "{% url 'CrearPostre' %}" % method="post"> {% csrf_token %}
+    
+    {{postreFormulario.as_p}}
+
+     <button type="submit" > Agregar nuevo postre </button>
+</form>
+{% endblock contenidoQueCambia %}
