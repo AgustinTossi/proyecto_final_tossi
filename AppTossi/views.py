@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import *
 from django.template import Template, Context
-from .models import Pizza, Empanada, Postre, Menu
+from .models import Pizza, Empanada, Postre
 from .forms import PizzaFormulario, EmpanadaFormulario, PostreFormulario
 
 def inicio(req):
@@ -9,16 +9,16 @@ def inicio(req):
     return render(req,"inicio.html")
 
 def pizzas(req):
-    
-    return render(req,"pizzas.html")
+    pizzas = Pizza.objects.all
+    return render(req,"pizzas.html",{"pizzas":pizzas})
 
 def empanadas(req):
-    
-    return render(req,"empanadas.html")
+    empanadas = Empanada.objects.all
+    return render(req,"empanadas.html",{"empanadas":empanadas})
 
 def postres(req):
-    
-    return render(req,"postres.html")
+    postres = Postre.objects.all
+    return render(req,"postres.html",{"postres":postres})
 
 def crearPizza(req):
     if req.method == 'POST':

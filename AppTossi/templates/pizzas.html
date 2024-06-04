@@ -1,26 +1,19 @@
 {% extends 'padre.html' %}
 
 {% block contenidoQueCambia %}
-<p>Buscamos los cursos con la camada nro: {{camada}}</p>
 
-{% if cursos %}
-
-<ul>
-  {% for curso in cursos %}
-    
-    <li>
-      {{curso.nombre}} - {{curso.camada}}
-    </li>
+<h1>Lista del menú de pizzas</h1>
+  <ul>
+    {% for pizza in pizzas %}
       
-  {% endfor %}
+      <li>
+        {{pizza.product_name}} - ${{pizza.price}}
+      </li>
+        
+    {% endfor %}
 
-</ul>
+  </ul>
 
-{% else %}
-
-  <p>No hubo coincidencias!</p>
-
-{% endif %}
 {% load static %}
 <section id="menu" class="py-5">
     <div class="container">

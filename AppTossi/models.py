@@ -1,10 +1,4 @@
 from django.db import models
-
-class Menu(models.Model):
-    
-    product_name = models.CharField(max_length=30) 
-    price = models.IntegerField(max_length=30) 
-    # stock = models.IntegerField    <---- se podria implementar en un futuro
     
 class Pizza(models.Model):
 
@@ -14,8 +8,7 @@ class Pizza(models.Model):
     
     def __str__(self):
         return f'{self.product_name}'
-    
-    
+        
     
 class Empanada(models.Model):
     product_name = models.CharField(max_length=30) 
@@ -24,6 +17,7 @@ class Empanada(models.Model):
 
     def __str__(self):
         return f'{self.product_name}'
+ 
     
 class Postre(models.Model):
     product_name = models.CharField(max_length=30) 
@@ -32,6 +26,16 @@ class Postre(models.Model):
     
     def __str__(self):
         return f'{self.product_name}'
+    
+    
+    
+    
+    
+    # class Menu(models.Model): 
+    
+#     product_name = models.CharField(max_length=30) 
+#     price = models.IntegerField(max_length=30) 
+#     # stock = models.IntegerField    <---- se podria implementar en un futuro
 
     
 

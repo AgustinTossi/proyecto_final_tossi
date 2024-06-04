@@ -1,7 +1,17 @@
 {% extends 'padre.html' %}
 
 {% block contenidoQueCambia %}
+<h1>Lista del menú de postres</h1>
+  <ul>
+    {% for postre in postres %}
+      
+      <li>
+        {{postre.product_name}} - ${{postre.price}}
+      </li>
+        
+    {% endfor %}
 
+  </ul>
 {% load static %}
 <section id="menu" class="py-5">
     <div class="container">

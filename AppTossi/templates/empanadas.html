@@ -2,6 +2,17 @@
 
 {% block contenidoQueCambia %}
 
+<h1>Lista del menú de empanadas</h1>
+  <ul>
+    {% for empanada in empanadas %}
+      
+      <li>
+        {{empanada.product_name}} - ${{empanada.price}}
+      </li>
+        
+    {% endfor %}
+
+  </ul>
 {% load static %}
 <section id="menu" class="py-5">
     <div class="container">
