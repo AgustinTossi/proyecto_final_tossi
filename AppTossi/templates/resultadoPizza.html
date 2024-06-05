@@ -1,0 +1,26 @@
+{% extends 'padre.html' %}
+
+{% block contenidoQueCambia %}
+
+<div>
+    <h1 class="text-center">Resultados de la Búsqueda</h1>
+    {% if pizzas %}
+    <ul class="list-group">
+        {% for pizza in pizzas %}
+        <li class="list-group-item">
+            <h5>{{ pizza.product_name }}:</h5>   
+            <h6>Ingredientes:</h6>
+            <p>{{ pizza.ingredients }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p >No se encontraron los ingredientes de la pizza solicitada. Revise que el nombre de la pizza solicitada coincida con el menú.</p>
+    {% endif %}
+</div>
+
+ 
+
+
+{% endblock contenidoQueCambia %}
+  

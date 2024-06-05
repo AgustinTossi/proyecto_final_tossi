@@ -3,7 +3,7 @@ from django.db import models
 class Pizza(models.Model):
 
     product_name = models.CharField(max_length=30) 
-    price = models.IntegerField(max_length=30) 
+    price = models.IntegerField() 
     ingredients = models.CharField(max_length=200)
     
     def __str__(self):
@@ -12,7 +12,7 @@ class Pizza(models.Model):
     
 class Empanada(models.Model):
     product_name = models.CharField(max_length=30) 
-    price = models.IntegerField(max_length=30) 
+    price = models.IntegerField()
     ingredients = models.CharField(max_length=200) 
 
     def __str__(self):
@@ -21,17 +21,21 @@ class Empanada(models.Model):
     
 class Postre(models.Model):
     product_name = models.CharField(max_length=30) 
-    price = models.IntegerField(max_length=30) 
+    price = models.IntegerField()
     ingredients = models.CharField(max_length=200)  
     
     def __str__(self):
         return f'{self.product_name}'
     
+
+        
     
     
     
     
-    # class Menu(models.Model): 
+    
+    
+# class Menu(models.Model): 
     
 #     product_name = models.CharField(max_length=30) 
 #     price = models.IntegerField(max_length=30) 
