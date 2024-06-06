@@ -11,8 +11,11 @@
       </li>
         
     {% endfor %}
-
   </ul>
+  <div> 
+    <a class="nav-link" href="{% url 'CrearEmpanada' %}">Agregar nueva empanada</a>
+    <a class="nav-link" href="{% url 'BuscadorEmpanada' %}">Consultar ingredientes</a>
+  </div>
   {% load static %}
   <section id="menu" class="py-5">
       <div class="container">

@@ -21,7 +21,6 @@ app-tossi/resultado-pizza/ ---> Aqui nos redirecciona luego de realizar la busqu
 app-tossi/resultado-empanada/ ---> Aqui nos redirecciona luego de realizar la busqueda de empanadas (Muestra los resultados de dicha busqueda).
 app-tossi/resultado-postre/ ---> Aqui nos redirecciona luego de realizar la busqueda de postres (Muestra los resultados de dicha busqueda).
 
-
+-En la seccion de pizza, empanada y postre se encuentran botones que redireccionan a las URLs de creacion de producto y consulta de ingredientes.
 -Todos los botones del navbar nos llevan a donde indica el nombre.
 -La seccion de contacto aun no esta en uso pero se podría modificar para que incluya un formulario de sugerencias o la toma de pedidos.
--Faltarian agregar botones que nos redireccionen a las URL de creacion de productos o a la sección de busqueda de ingredientes. Sera incluido en la proxima version del proyecto.
