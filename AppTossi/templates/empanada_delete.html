@@ -1,0 +1,15 @@
+{% extends 'padre.html' %}
+
+{% block contenidoQueCambia %}
+  
+<form action="{% url 'EmpanadaDelete' empanada.id %}" method="post">{% csrf_token %}
+
+  <p>Esta seguro que desea eliminar la empanada seleccionada?</p>
+
+  <button type="submit"> Confirmar </button>
+  <button><a href="{% url 'Empanadas' %}"> Cancelar </a> </button>
+
+</form>
+
+{% endblock contenidoQueCambia %}
+

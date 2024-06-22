@@ -1,19 +1,80 @@
 {% extends 'padre.html' %}
 
 {% block contenidoQueCambia %}
+{% load static %}
+
+{% if user.is_staff %}
+
+<h1>Lista del menú de postres</h1>
+  {% for postre in postres %}
+        
+    <li>
+      <a href="{% url 'PostreDetail' postre.id %}">
+        {{postre.product_name}} - ${{postre.price}}
+      </a>          
+    </li>
+    <button>
+      <a href="{% url 'PostreUpdate' postre.id %}"> Actualizar </a>
+    </button>
+    <button>
+      <a href="{% url 'PostreDelete' postre.id %}"> Eliminar </a>
+    </button> 
+      <a class="nav-link" href="{% url 'PostreCreate' %}">Agregar nuevo postre</a>
+  {% endfor %}
+    
+    {% load static %}
+    <section id="menu" class="py-5">
+        <div class="container">
+          <h2 class="text-center mb-4">Alguna de nuestras delicias.</h2>
+          <div class="row">
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <img src="{% static 'images/cheese_frutos_rojos.jpeg' %}" class="card-img-top" alt="Plato 1">
+                <div class="card-body">
+                  <h5 class="card-title">Postre de Cheese Cake</h5>
+                  <p class="card-text">Un delicioso postre con galletitas de vainilla, queso crema, frutos rojos y frambuesas!</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <img src="{% static 'images/falsa_choco.jpeg' %}" class="card-img-top" alt="Plato 2">
+                <div class="card-body">
+                  <h5 class="card-title">Postre Chocotorta</h5>
+                  <p class="card-text">Un delicioso postre a base de galletitas de chocolate, dulce de leche y queso crema!</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="card">
+                <img src="{% static 'images/lemon_pie.jpeg' %}" class="card-img-top" alt="Plato 3">
+                <div class="card-body">
+                  <h5 class="card-title">Postre de Lemon Pie</h5>
+                  <p class="card-text">Un delicioso postre hecho con galletitas de vainilla, jugo de limon, crema con ralladura de limon!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>   
+
+{% elif user.is_authenticated %}
 <h1>Lista del menú de postres</h1>
   <ul>
     {% for postre in postres %}
       
       <li>
-        {{postre.product_name}} - ${{postre.price}}
+        <a href="{% url 'PostreDetail' postre.id %}">
+          {{postre.product_name}} - ${{postre.price}} 
+         
+        </a>
+
       </li>
         
     {% endfor %}
 
   </ul>
-  <a class="nav-link" href="{% url 'CrearPostre' %}">Agregar nuevo postre</a>
-  <a class="nav-link" href="{% url 'BuscadorPostre' %}">Consultar ingredientes</a>
+<a class="nav-link" href="{% url 'BuscadorPostre' %}">Consultar ingredientes</a>
   
   {% load static %}
   <section id="menu" class="py-5">
@@ -50,8 +111,60 @@
         </div>
       </div>
     </section>   
+
+{% else %}
+<h1>Lista del menú de postres</h1>
+  <ul>
+    {% for postre in postres %}
+      
+      <li>
+        {{postre.product_name}} - ${{postre.price}}
+      </li>
+        
+    {% endfor %}
+  </ul>
+  <p> <strong>  <a href="{% url 'Login'  %}">Logueate</a>  para ver mas informacion de los productos.</strong> </p> 
+
+  
+  {% load static %}
+  <section id="menu" class="py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Alguna de nuestras delicias.</h2>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="{% static 'images/cheese_frutos_rojos.jpeg' %}" class="card-img-top" alt="Plato 1">
+              <div class="card-body">
+                <h5 class="card-title">Postre de Cheese Cake</h5>
+                <p class="card-text">Un delicioso postre con galletitas de vainilla, queso crema, frutos rojos y frambuesas!</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="{% static 'images/falsa_choco.jpeg' %}" class="card-img-top" alt="Plato 2">
+              <div class="card-body">
+                <h5 class="card-title">Postre Chocotorta</h5>
+                <p class="card-text">Un delicioso postre a base de galletitas de chocolate, dulce de leche y queso crema!</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="{% static 'images/lemon_pie.jpeg' %}" class="card-img-top" alt="Plato 3">
+              <div class="card-body">
+                <h5 class="card-title">Postre de Lemon Pie</h5>
+                <p class="card-text">Un delicioso postre hecho con galletitas de vainilla, jugo de limon, crema con ralladura de limon!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>   
+{% endif %}
+
   
       
-  {% endblock contenidoQueCambia %}
+{% endblock contenidoQueCambia %}
   
       

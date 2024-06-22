@@ -1,0 +1,15 @@
+{% extends 'padre.html' %}
+
+{% block contenidoQueCambia %}
+  
+<form action="{% url 'PostreDelete' postre.id %}" method="post">{% csrf_token %}
+
+  <p>Esta seguro que desea eliminar el postre seleccionado?</p>
+
+  <button type="submit"> Confirmar </button>
+  <button><a href="{% url 'Postres' %}"> Cancelar </a> </button>
+
+</form>
+
+{% endblock contenidoQueCambia %}
+

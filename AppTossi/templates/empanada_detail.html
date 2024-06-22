@@ -1,0 +1,20 @@
+{% extends 'padre.html' %}
+
+{% block contenidoQueCambia %}
+{% load static %} 
+
+<h1> {{empanada.product_name}} </h1>
+
+
+
+<h4> Ingredientes: {{empanada.ingredients}} <br> Precio: {{empanada.price}} <br> Stock: {{empanada.stock}} <br> 
+    {% if empanada.vegetarian == True %}
+    Apta para vegetarianos: Si
+    {% else %}
+      Apta para vegetarianos: No 
+    {% endif %}
+  
+
+</h4>
+<img src="{{ empanada.image.url }}" alt="{{ empanada.name }}" style="max-width: 20%; height: auto;">
+{% endblock contenidoQueCambia %}

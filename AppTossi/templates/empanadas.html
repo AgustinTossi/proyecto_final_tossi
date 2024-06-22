@@ -2,20 +2,28 @@
 
 {% block contenidoQueCambia %}
 
+{% if user.is_staff %}
+
 <h1>Lista del menú de empanadas</h1>
   <ul>
     {% for empanada in empanadas %}
       
       <li>
-        {{empanada.product_name}} - ${{empanada.price}}
+        <a href="{% url 'EmpanadaDetail' empanada.id %}">
+          {{empanada.product_name}} - ${{empanada.price}}
+        </a>          
       </li>
-        
+      <button>
+        <a href="{% url 'EmpanadaUpdate' empanada.id %}"> Actualizar </a>
+      </button>
+      <button>
+        <a href="{% url 'EmpanadaDelete' empanada.id %}"> Eliminar </a>
+      </button>      
     {% endfor %}
+
   </ul>
-  <div> 
-    <a class="nav-link" href="{% url 'CrearEmpanada' %}">Agregar nueva empanada</a>
-    <a class="nav-link" href="{% url 'BuscadorEmpanada' %}">Consultar ingredientes</a>
-  </div>
+
+<a class="nav-link" href="{% url 'EmpanadaCreate' %}">Agregar nueva empanada</a>
   {% load static %}
   <section id="menu" class="py-5">
       <div class="container">
@@ -51,6 +59,112 @@
         </div>
       </div>
     </section>   
+
+
+{% elif user.is_authenticated %}
+
+<h1>Lista del menú de empanadas</h1>
+  <ul>
+    {% for empanada in empanadas %}
+      
+      <li>
+        <a href="{% url 'EmpanadaDetail' empanada.id %}">
+          {{empanada.product_name}} - ${{empanada.price}} 
+         
+        </a>
+
+      </li>
+        
+    {% endfor %}
+
+  </ul>
+<a class="nav-link" href="{% url 'BuscadorEmpanada' %}">Consultar ingredientes</a>
+{% load static %}
+  <section id="menu" class="py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Alguna de nuestras delicias.</h2>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="{% static 'images/empanada_carne.jpeg' %}" class="card-img-top" alt="Plato 1">
+              <div class="card-body">
+                <h5 class="card-title">Empanada de Carne Suave</h5>
+                <p class="card-text">Una deliciosa empanada de carne picada con cebolla, pimentón y aceitunas.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="{% static 'images/empanada_champi.jpeg' %}" class="card-img-top" alt="Plato 2">
+              <div class="card-body">
+                <h5 class="card-title">Empanada de Champiñon</h5>
+                <p class="card-text">Una deliciosa empanada margarita con muzzarella, champiñon y cebolla caramelizada.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="{% static 'images/empanada_verdura.jpeg' %}" class="card-img-top" alt="Plato 3">
+              <div class="card-body">
+                <h5 class="card-title">Empanada de verdura</h5>
+                <p class="card-text"> Una deliciosa empanada de verdura con provolone rallado y huevo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>   
+
+{% else %}
+h1>Lista del menú de empanadas</h1>
+  <ul>
+    {% for empanada in empanadas %}
+      
+      <li>
+        {{empanada.product_name}} - ${{empanada.price}}
+      </li>
+        
+    {% endfor %}
+  </ul>
+<p> <strong>  <a href="{% url 'Login'  %}">Logueate</a>  para ver mas informacion de los productos.</strong> </p> 
+  {% load static %}
+  <section id="menu" class="py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Alguna de nuestras delicias.</h2>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="{% static 'images/empanada_carne.jpeg' %}" class="card-img-top" alt="Plato 1">
+              <div class="card-body">
+                <h5 class="card-title">Empanada de Carne Suave</h5>
+                <p class="card-text">Una deliciosa empanada de carne picada con cebolla, pimentón y aceitunas.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="{% static 'images/empanada_champi.jpeg' %}" class="card-img-top" alt="Plato 2">
+              <div class="card-body">
+                <h5 class="card-title">Empanada de Champiñon</h5>
+                <p class="card-text">Una deliciosa empanada margarita con muzzarella, champiñon y cebolla caramelizada.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="{% static 'images/empanada_verdura.jpeg' %}" class="card-img-top" alt="Plato 3">
+              <div class="card-body">
+                <h5 class="card-title">Empanada de verdura</h5>
+                <p class="card-text"> Una deliciosa empanada de verdura con provolone rallado y huevo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>   
+{% endif %}
+
+<
   
       
   {% endblock contenidoQueCambia %}

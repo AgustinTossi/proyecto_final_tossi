@@ -1,0 +1,20 @@
+{% extends 'padre.html' %}
+
+{% block contenidoQueCambia %}
+{% load static %} 
+
+<h1> {{pizza.product_name}} </h1>
+
+
+
+<h4> Ingredientes: {{pizza.ingredients}} <br> Precio: {{pizza.price}} <br> Stock: {{pizza.stock}} <br> 
+    {% if pizza.vegetarian == True %}
+    Apta para vegetarianos: Si
+    {% else %}
+      Apta para vegetarianos: No 
+    {% endif %}
+  
+
+</h4>
+<img src="{{ pizza.image.url }}" alt="{{ pizza.name }}" style="max-width: 20%; height: auto;">
+{% endblock contenidoQueCambia %}

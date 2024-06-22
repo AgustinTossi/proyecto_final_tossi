@@ -1,21 +1,31 @@
 {% extends 'padre.html' %}
 
 {% block contenidoQueCambia %}
+{% load static %}
 
+
+{% if user.is_staff %}
+ 
 <h1>Lista del menú de pizzas</h1>
   <ul>
     {% for pizza in pizzas %}
       
       <li>
-        {{pizza.product_name}} - ${{pizza.price}}
+        <a href="{% url 'PizzaDetail' pizza.id %}">
+          {{pizza.product_name}} - ${{pizza.price}}
+        </a>          
       </li>
-        
+      <button>
+        <a href="{% url 'PizzaUpdate' pizza.id %}"> Actualizar </a>
+      </button>
+      <button>
+        <a href="{% url 'PizzaDelete' pizza.id %}"> Eliminar </a>
+      </button>      
     {% endfor %}
 
   </ul>
 
-<a class="nav-link" href="{% url 'CrearPizza' %}">Agregar nueva pizza</a>
-<a class="nav-link" href="{% url 'BuscadorPizza' %}">Consultar ingredientes</a>
+<a class="nav-link" href="{% url 'PizzaCreate' %}">Agregar nueva pizza</a>
 
 {% load static %}
 <section id="menu" class="py-5">
@@ -52,6 +62,119 @@
       </div>
     </div>
   </section>   
+{% elif user.is_authenticated %}
+<h1>Lista del menú de pizzas</h1>
+  <ul>
+    {% for pizza in pizzas %}
+      
+      <li>
+        <a href="{% url 'PizzaDetail' pizza.id %}">
+          {{pizza.product_name}} - ${{pizza.price}} 
+         
+        </a>
+
+      </li>
+        
+    {% endfor %}
+
+  </ul>
+<a class="nav-link" href="{% url 'BuscadorPizza' %}">Consultar ingredientes</a>
+
+{% load static %}
+<section id="menu" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Alguna de nuestras delicias.</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{% static 'images/pizza_muzzarella.jpeg' %}" class="card-img-top" alt="Plato 1">
+            <div class="card-body">
+              <h5 class="card-title">Pizza de mozzarella</h5>
+              <p class="card-text">Una deliciosa pizza con queso mozzarella, salsa de tomate y aceitunas.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{% static 'images/pizza_champiñon.jpeg' %}" class="card-img-top" alt="Plato 2">
+            <div class="card-body">
+              <h5 class="card-title">Pizza Champiñones</h5>
+              <p class="card-text">Una deliciosa pizza con queso mozzarella, salsa de tomate y champiñon con cebolla caramelizada!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{% static 'images/pizza_jamon_y_morrones.jpeg' %}" class="card-img-top" alt="Plato 3">
+            <div class="card-body">
+              <h5 class="card-title">Pizza jamon y morrones</h5>
+              <p class="card-text">Una deliciosa pizza con queso mozzarella, salsa de tomate, jamon y morrones!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>       
+{% else %}
+<h1>Lista del menú de pizzas</h1>
+  <ul>
+    {% for pizza in pizzas %}
+      
+      <li>
+          {{pizza.product_name}} - ${{pizza.price}} 
+         
+        </a>
+
+      </li>
+        
+    {% endfor %}
+    <p> <strong>  <a href="{% url 'Login'  %}">Logueate</a>  para ver mas informacion de los productos.</strong> </p> 
+
+  </ul>
+
+
+
+
+{% load static %}
+<section id="menu" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Alguna de nuestras delicias.</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{% static 'images/pizza_muzzarella.jpeg' %}" class="card-img-top" alt="Plato 1">
+            <div class="card-body">
+              <h5 class="card-title">Pizza de mozzarella</h5>
+              <p class="card-text">Una deliciosa pizza con queso mozzarella, salsa de tomate y aceitunas.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{% static 'images/pizza_champiñon.jpeg' %}" class="card-img-top" alt="Plato 2">
+            <div class="card-body">
+              <h5 class="card-title">Pizza Champiñones</h5>
+              <p class="card-text">Una deliciosa pizza con queso mozzarella, salsa de tomate y champiñon con cebolla caramelizada!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{% static 'images/pizza_jamon_y_morrones.jpeg' %}" class="card-img-top" alt="Plato 3">
+            <div class="card-body">
+              <h5 class="card-title">Pizza jamon y morrones</h5>
+              <p class="card-text">Una deliciosa pizza con queso mozzarella, salsa de tomate, jamon y morrones!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>   
+
+    
+{% endif %}
+  
+
 
     
 {% endblock contenidoQueCambia %}
