@@ -8,7 +8,7 @@ class Pizza(models.Model):
     ingredients = models.CharField(max_length=200)
     stock = models.IntegerField(default=0)
     vegetarian = models.BooleanField(default=False)
-    image = models.ImageField(upload_to='product_images', blank=True, null=True)
+    img = models.ImageField(upload_to='product_images', blank=True, null=True)
     
     
     def __str__(self):

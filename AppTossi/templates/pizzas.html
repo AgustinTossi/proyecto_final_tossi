@@ -78,7 +78,7 @@
     {% endfor %}
 
   </ul>
-<a class="nav-link" href="{% url 'BuscadorPizza' %}">Consultar ingredientes</a>
+<a class="nav-link" href="{% url 'SearchPizza' %}">Consultar ingredientes</a>
 
 {% load static %}
 <section id="menu" class="py-5">
@@ -116,22 +116,18 @@
     </div>
   </section>       
 {% else %}
+
 <h1>Lista del menú de pizzas</h1>
   <ul>
     {% for pizza in pizzas %}
       
       <li>
-          {{pizza.product_name}} - ${{pizza.price}} 
-         
-        </a>
-
+        {{pizza.product_name}} - ${{pizza.price}}
       </li>
         
     {% endfor %}
-    <p> <strong>  <a href="{% url 'Login'  %}">Logueate</a>  para ver mas informacion de los productos.</strong> </p> 
-
   </ul>
-
+  <p> <strong>  <a href="{% url 'Login'  %}">Logueate</a>  para ver mas informacion de los productos.</strong> </p> 
 
 
 

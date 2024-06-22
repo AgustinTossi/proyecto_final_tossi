@@ -63,7 +63,7 @@
 
 {% elif user.is_authenticated %}
 
-<h1>Lista del menú de empanadas</h1>
+<h1>Lista del menú de empanadas </h1>
   <ul>
     {% for empanada in empanadas %}
       
@@ -78,7 +78,7 @@
     {% endfor %}
 
   </ul>
-<a class="nav-link" href="{% url 'BuscadorEmpanada' %}">Consultar ingredientes</a>
+<a class="nav-link" href="{% url 'SearchEmpanada' %}">Consultar ingredientes</a>
 {% load static %}
   <section id="menu" class="py-5">
       <div class="container">
@@ -116,7 +116,7 @@
     </section>   
 
 {% else %}
-h1>Lista del menú de empanadas</h1>
+<h1>Lista del menú de empanadas</h1>
   <ul>
     {% for empanada in empanadas %}
       

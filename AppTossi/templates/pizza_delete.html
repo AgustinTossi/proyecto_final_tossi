@@ -2,12 +2,12 @@
 
 {% block contenidoQueCambia %}
   
-<form action="{% url 'PostreDelete' postre.id %}" method="post">{% csrf_token %}
+<form action="{% url 'PizzaDelete' pizza.id %}" method="post">{% csrf_token %}
 
-  <p>Esta seguro que desea eliminar el postre seleccionado?</p>
+  <p>Esta seguro que desea eliminar la pizza seleccionada?</p>
 
   <button type="submit"> Confirmar </button>
-  <button><a href="{% url 'Postres' %}"> Cancelar </a> </button>
+  <button><a href="{% url 'Pizzas' %}"> Cancelar </a> </button>
 
 </form>
 

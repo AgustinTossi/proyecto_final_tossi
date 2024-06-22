@@ -2,23 +2,6 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
-class PizzaFormulario(forms.Form):
-    
-    name = forms.CharField (max_length=40)
-    ingredients = forms.CharField()
-    price = forms.IntegerField()
-    
-class EmpanadaFormulario(forms.Form):
-    
-    name = forms.CharField (max_length=40)
-    ingredients = forms.CharField()
-    price = forms.IntegerField()
-    
-class PostreFormulario(forms.Form):
-    
-    name = forms.CharField (max_length=40)
-    ingredients = forms.CharField()
-    price = forms.IntegerField()
     
 class UserRegisterForm(UserCreationForm):
     username = forms.CharField(label="Nombre de usuario",max_length=20)
@@ -64,5 +47,10 @@ class UserEditForm(UserChangeForm):
       raise forms.ValidationError("Las contraseñas deben ser iguales")
     return password2
     
+    
+class SuggestionForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    message = forms.CharField(max_length=500)
     
 

@@ -2,11 +2,11 @@
 
 {% block contenidoQueCambia %}
   
-<form action="{% url 'PostreCreate' %}" method="post">{% csrf_token %}
+<form action="{% url 'PostreCreate' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
 
   {{form.as_p}}
 
-  <button type="submit"> Crear </button>
+  <button type="submit"> Agregar postre al menu </button>
 
 </form>
 

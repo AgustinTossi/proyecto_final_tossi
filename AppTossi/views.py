@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import *
 from django.template import Template, Context
 from .models import Pizza, Empanada, Postre
-from .forms import PizzaFormulario, EmpanadaFormulario, PostreFormulario, UserRegisterForm,UserEditForm
+from .forms import *
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.contrib.auth import authenticate, login, logout
@@ -10,10 +10,29 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.admin.views.decorators import staff_member_required
+from django.core.mail import send_mail
+from django.conf import settings
 
-def inicio(req):
-    
-    return render(req,"inicio.html")
+def home(req):
+  if req.method == 'POST':
+      form = SuggestionForm(req.POST)
+      if form.is_valid():
+          name = form.cleaned_data['name']
+          email = form.cleaned_data['email']
+          message = form.cleaned_data['message']
+          send_mail(
+                'Nueva Sugerencia',
+                f'Nombre: {name}\nEmail: {email}\nMensaje: {message}',
+                settings.EMAIL_HOST_USER,
+                ['zahkeryt@gmail.com'],  # Reemplaza con el correo del administrador
+                fail_silently=False,
+            )
+          
+
+          return render(req,'home.html',{'message':'Gracias por tu sugerencia' })
+  else:
+      form = SuggestionForm()
+  return render(req, 'home.html', {'form': form})
 
 def pizzas(req):
     pizzas = Pizza.objects.all
@@ -28,128 +47,53 @@ def empanadas(req):
 def postres(req):
     postres = Postre.objects.all
     return render(req,"postres.html",{"postres":postres})
-
-def crearPizza(req):
-    if req.method == 'POST':
-   
-   
-        pizzaFormulario = PizzaFormulario(req.POST)
-        
-        if pizzaFormulario.is_valid():
-            
-            data = pizzaFormulario.cleaned_data
-            
-            nueva_pizza = Pizza(product_name=data['name'],ingredients=data['ingredients'],price=data['price'])
-            nueva_pizza.save()  
-            
-        
-            return render (req,"inicio.html")
-        else:
-            
-            return render(req,"inicio.html")
-    
-    else:
-        pizzaFormulario = PizzaFormulario()
-
-        return render(req,"pizzaFormulario.html",{"pizzaFormulario": pizzaFormulario})
-    
-    
-def crearEmpanada(req):
-    if req.method == 'POST':
-   
-   
-        empanadaFormulario = EmpanadaFormulario(req.POST)
-        
-        if empanadaFormulario.is_valid():
-            
-            data = empanadaFormulario.cleaned_data
-            
-            nueva_empanada = Empanada(product_name=data['name'],ingredients=data['ingredients'],price=data['price'])
-            nueva_empanada.save()  
-            
-        
-            return render (req,"inicio.html")
-        else:
-            
-            return render(req,"inicio.html")
-    
-    else:
-        empanadaFormulario = EmpanadaFormulario()
-
-        return render(req,"empanadaFormulario.html",{"empanadaFormulario": empanadaFormulario})
-    
-def crearPostre(req):
-    if req.method == 'POST':
-   
-   
-        postreFormulario = PostreFormulario(req.POST)
-        
-        if postreFormulario.is_valid():
-            
-            data = postreFormulario.cleaned_data
-            
-            nuevo_postre = Postre(product_name=data['name'],ingredients=data['ingredients'],price=data['price'])
-            nuevo_postre.save()  
-            
-        
-            return render (req,"inicio.html")
-        else:
-            
-            return render(req,"inicio.html")
-    
-    else:
-       
-        postreFormulario = PostreFormulario()
-        
-        return render(req,"postreFormulario.html",{"postreFormulario": postreFormulario})     
      
 
-def buscadorPizza(req):
+def searchPizza(req):
         
-    return render(req,"buscador_pizza.html",{})
+    return render(req,"search_pizza.html")
 
-def buscarPizza(req):
-    
-
+def pizzaResult(req):
+  
     if req.GET["name"]:
        
         name = req.GET.get("name")
         pizzas = Pizza.objects.filter(product_name__icontains=name)
-        return render(req, "resultadoPizza.html", {"pizzas": pizzas, "product_name":name})
+        return render(req, "pizzaResult.html", {"pizzas": pizzas, "product_name":name})
     else:
-        return render(req, "inicio.html", {"message": "No envias el nombre del producto."}) 
+        return render(req, "home.html", {"message": "No envias el nombre del producto."}) 
     
     
-def buscadorEmpanada(req):
+def searchEmpanada(req):
         
-    return render(req,"buscador_empanada.html",{})
+    return render(req,"search_empanada.html",{})
 
-def buscarEmpanada(req):
+def empanadaResult(req):
     
 
     if req.GET["name"]:
        
         name = req.GET.get("name")
-        empanadas = Empanada.objects.filter(product_name=name)
-        return render(req, "resultadoEmpanada.html", {"empanadas": empanadas, "product_name":name})
+        empanadas = Empanada.objects.filter(product_name__icontains=name)
+        return render(req, "empandaResult.html", {"empanadas": empanadas, "product_name":name})
     else:
-        return render(req, "inicio.html", {"message": "No envias el nombre del producto."}) 
+        return render(req, "home.html", {"message": "No envias el nombre del producto."}) 
     
     
-def buscadorPostre(req):
+def searchPostre(req):
         
-    return render(req,"buscador_postre.html",{})
+    return render(req,"search_postre.html",{})
 
-def buscarPostre(req):
+def postreResult(req):
     
 
     if req.GET["name"]:
        
         name = req.GET.get("name")
         postres = Postre.objects.filter(product_name__icontains=name)
-        return render(req, "resultadoPostre.html", {"postres": postres, "product_name":name})
+        return render(req, "postreResult.html", {"postres": postres, "product_name":name})
     else:
-        return render(req, "inicio.html", {"message": "No envias el nombre del producto."}) 
+        return render(req, "home.html", {"message": "No envias el nombre del producto."}) 
     
     
 def login_view(req):
@@ -169,14 +113,14 @@ def login_view(req):
 
       if user:
         login(req, user)
-        return render(req, "inicio.html", {"message": f"Hola {user} bienvenido/a a Pizzeria Margarita"})
+        return render(req, "home.html", {"message": f"Hola {user} bienvenido/a a Pizzeria Margarita"})
       
       else:
-        return render(req, "inicio.html", {"message": "Datos incorrectos"})
+        return render(req, "home.html", {"message": "Datos incorrectos"})
     
     else:
 
-      return render(req, "inicio.html", {"message": "Datos inválidos"})
+      return render(req, "home.html", {"message": "Datos inválidos"})
   
   else:
 
@@ -198,11 +142,11 @@ def register(req):
       user = data["username"]
       myForm.save()
       
-      return render(req, "inicio.html", {"message": f"Usuario {user} creado con éxito!"})
+      return render(req, "home.html", {"message": f"Usuario {user} creado con éxito!"})
     
     else:
 
-      return render(req, "inicio.html", {"message": "Datos inválidos"})
+      return render(req, "home.html", {"message": "Datos inválidos"})
   
   else:
 
@@ -316,11 +260,10 @@ def edit_profile(req):
       usuario.first_name = data["first_name"]
       usuario.last_name = data["last_name"]
       usuario.email = data["email"]
-      usuario.set_password(data["password1"])
 
       usuario.save()
 
-      return render(req, "inicio.html", {"message": "Datos actualizado con éxito"})
+      return render(req, "home.html", {"message": "Datos actualizado con éxito"})
     
     else:
 
@@ -331,12 +274,5 @@ def edit_profile(req):
     myForm = UserEditForm(instance=req.user)
 
     return render(req, "edit_profile.html", {"myForm": myForm})
-
-
-
-
-
-
-    
-    
-
+  
+ 
