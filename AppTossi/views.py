@@ -243,7 +243,7 @@ class PostreUpdate(UpdateView):
   fields = ('__all__')
   success_url = "/app-tossi/postres/"
   context_object_name = "postre"
-
+  
 class PostreCreate(CreateView):
 
   model = Postre
