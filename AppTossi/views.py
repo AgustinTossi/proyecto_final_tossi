@@ -48,11 +48,12 @@ def postres(req):
     postres = Postre.objects.all
     return render(req,"postres.html",{"postres":postres})
      
-
+@login_required()
 def searchPizza(req):
         
     return render(req,"search_pizza.html")
-
+  
+@login_required()
 def pizzaResult(req):
   
     if req.GET["name"]:
@@ -63,11 +64,13 @@ def pizzaResult(req):
     else:
         return render(req, "home.html", {"message": "No envias el nombre del producto."}) 
     
-    
+ 
+@login_required()   
 def searchEmpanada(req):
         
     return render(req,"search_empanada.html",{})
 
+@login_required()
 def empanadaResult(req):
     
 
@@ -79,11 +82,13 @@ def empanadaResult(req):
     else:
         return render(req, "home.html", {"message": "No envias el nombre del producto."}) 
     
-    
+
+@login_required()    
 def searchPostre(req):
         
     return render(req,"search_postre.html",{})
 
+@login_required()
 def postreResult(req):
     
 
@@ -161,14 +166,14 @@ class PizzaDetail(DetailView):
   template_name = 'pizza_detail.html'
   context_object_name = "pizza"
   url = Pizza.objects.get
-  
+ 
 class PizzaDelete(DeleteView):
 
   model = Pizza
   template_name = 'pizza_delete.html'
   success_url = "/app-tossi/pizzas/"
   context_object_name = "pizza"
-  
+ 
 class PizzaUpdate(UpdateView):
 
   model = Pizza
@@ -176,6 +181,7 @@ class PizzaUpdate(UpdateView):
   fields = ('__all__')
   success_url = "/app-tossi/pizzas/"
   context_object_name = "pizza"
+
 
 class PizzaCreate(CreateView):
 
@@ -191,7 +197,7 @@ class EmpanadaDetail(DetailView):
   template_name = 'empanada_detail.html'
   context_object_name = "empanada"
   url = Empanada.objects.get
-  
+
 class EmpanadaDelete(DeleteView):
 
   model = Empanada
@@ -221,14 +227,15 @@ class PostreDetail(DetailView):
   template_name = 'postre_detail.html'
   context_object_name = "postre"
   url = Postre.objects.get
-  
+ 
 class PostreDelete(DeleteView):
 
   model = Postre
   template_name = 'postre_delete.html'
   success_url = "/app-tossi/postres/"
   context_object_name = "postre"
-  
+
+
 class PostreUpdate(UpdateView):
 
   model = Postre
